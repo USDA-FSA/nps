@@ -1,6 +1,53 @@
 {
   "main": [
     {
+      "uid": "393643333454440-85bb-d039d061c96d",
+      "label": "Demos",
+      "path": "/Demos",
+      "hasChild": "true",
+      "multiColumn": "false",
+      "columnClass": "",
+      "hasHeaders": "true",
+      "children": [
+        {
+          "uid": "repo222222fasdf-id",
+          "header": "Payment Certification Approval",
+          "group": [
+            {
+              "uid": "dsdf44d-487c-9bdd-576b1c3c3961",
+              "label": "Help - Page Level",
+              "path": "/demos/help/page-level-pca",
+              "hasChild": "false"
+            },
+            {
+              "uid": "5cf5e97-4191-be2sdfsda503b61",
+              "label": "Help - Inline",
+              "path": "/demos/help/inline-pca",
+              "hasChild": "false"
+            }
+          ]
+        },
+        {
+          "uid": "rsdf432342adssdfdiew-id",
+          "header": "Other Agency Offset",
+          "group": [
+            {
+              "uid": "d6e0fcasdf44fs6b1c3c3961",
+              "label": "Help - Page Level",
+              "path": "/demos/help/page-level-oao",
+              "hasChild": "false"
+            },
+            {
+              "uid": "5cf5asd2a-86sadf503b61",
+              "label": "Help - Inline",
+              "path": "/demos/help/inline-oao",
+              "hasChild": "false"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "uid": "444f5a94-31d7-41c9-965d-48917906747e",
       "label": "Home",
       "path": "/",
@@ -174,29 +221,19 @@
           "hasChild": "false"
         }
       ]
-    },
+    }
+  ],
+  "side": [
     {
-      "uid": "393644bb-3e35-41c0-85bb-d039d061c96d",
-      "label": "Demos",
-      "path": "/Demos",
-      "hasChild": "true",
-      "multiColumn": "false",
-      "columnClass": "fsa-nav-global__link--has-sub-menu",
-      "hasHeaders": "false",
-      "children": [
-        {
-          "uid": "d6e0fc58-b44d-487c-9bdd-576b1c3c3961",
-          "label": "Help - Page Level",
-          "path": "/demos/help/page-level",
-          "hasChild": "false"
-        },
-        {
-          "uid": "5cf5e142-f797-4191-be2a-86e8bd503b61",
-          "label": "Help - Inline",
-          "path": "/demos/help/inline",
-          "hasChild": "false"
-        }
-      ]
+      "uid": "help-id",
+      "label": "Help",
+      "path": "/help",
+      "hasChild": "false",
+      "columnClass": "",
+      "icon": {
+        "class": "fsa-icon fsa-icon--size-1",
+        "path": "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"
+      }
     }
   ]
 }

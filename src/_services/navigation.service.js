@@ -1,23 +1,30 @@
 
-const URL = '/api/nps-nav.json';
+const DEFAULT_NAV_URL = '/api/nps-default-nav.json';
+const PAGE_LEVEL_HELP_NAV_URL = '/api/nps-page-level-help-nav.json';
+const INLINE_HELP_NAV_URL = '/api/nps-inline-help-nav.json';
+
 const HEADERS = new Headers();
 HEADERS.append(
   "Authorization",
   "api_key"
 );
-const REQ = new Request( URL,
-  {
-    method: "GET",
-    //HEADERS,
-    mode: "cors",
-    cache: "default"
-  }
-);
 
-const createRequest = (obj) => {
+const createRequest = (type) => {
   let url = '';
-  if(obj.url && obj.url != '')  url = obj.url
-  else url = URL;
+  switch(type){
+    case 'page-level-help':
+      url = PAGE_LEVEL_HELP_NAV_URL;
+      break;
+    case 'inline-help':
+      url = INLINE_HELP_NAV_URL;
+      break;
+    case 'default-nav':
+      url = DEFAULT_NAV_URL;
+      break;
+    default:
+      url = DEFAULT_NAV_URL;
+      break;
+  }
 
   return new Request( url,
     {
@@ -34,7 +41,7 @@ export const navigationService = {
   isLoaded: false,
 
   getNavigation: async (payload, callback) => {
-    let REQ = createRequest(payload);
+    let REQ = createRequest(payload.type);
     const response = await fetch(REQ);
     try{
       let res = await response.json();

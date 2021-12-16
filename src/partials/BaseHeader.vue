@@ -40,7 +40,7 @@ import globalNav from '@/components/global-nav/global-nav.vue';
 
 export default {
   props: {
-    NAV_URL: String
+    NAV_TYPE: String
   },
   components: {
     tophat,
@@ -52,7 +52,7 @@ export default {
     const navigationData = computed(() => store.getters["navigation/getNavigation"]);
 
     onMounted(()=>{
-      let navObj = { url: props.NAV_URL ? props.NAV_URL : '' };
+      let navObj = { type: props.NAV_TYPE ? props.NAV_TYPE : '' };
       store.dispatch("navigation/setNavigation", navObj);
     });
 

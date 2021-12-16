@@ -1,13 +1,23 @@
 <template>
   <div>
 
-    <baseHeader NAV_TYPE="inline-help"></baseHeader>
+    <baseHeader NAV_TYPE="page-level-help"></baseHeader>
 
     <main id="main-content" tabindex="-1">
       <div class="fsa-section">
         <div class="fsa-section__bd">
           <div class="fsa-m-t--l">
-            <h1 class="fsa-m--none">Payments Dashboard</h1>
+            <div class="fsa-level@m fsa-level--justify-between">
+              <h1 class="fsa-m--none">Payments Dashboard</h1>
+              <div class="fsa-level fsa-level--justify-between fsa-level--grow-auto">
+                <span>
+                  <button @click="showModal(helpModalId)" class="fsa-btn fsa-btn--block fsa-btn--flat" type="button">
+                    <svg class="fsa-icon fsa-icon--size-1" aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"></path></svg>
+                    Help
+                  </button>
+                </span>
+              </div>
+            </div>
           </div>
 
         </div>
@@ -148,10 +158,46 @@
           </div>
           <!-- SEARCH END-->
 
+
+          <!-- Popover START -->
+          <div class="fsa-popover fsa-popover--tr fsa-popover--size-large" id="table-help-popover-123" aria-hidden="true">
+            <div class="fsa-popover__content">
+              <div class="fsa-popover__hd">
+                <div class="fsa-level@m fsa-level--justify-between">
+                  <h2 class="fsa-popover__title">Table Help</h2>
+                  <button @click="hidePopover('table-help-popover-123')" class="" type="button">
+                    <svg class="fsa-icon fsa-icon--size-2" aria-hidden="false" focusable="false" role="img" fill="#494440" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                      <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div class="fsa-popover__bd">
+                <div id="help-popup-body">
+                  <p>Aut illum nostrum, perspiciatis asperiores esse eveniet earum rem cumque autsit tenetur adipisci. Eos facilis illum qui fugit perspiciatis asperiores esse eveniet earum rem cumque autsit.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Popover END -->
+
           <!-- Results Table START -->
           <table class="fsa-table">
             <caption>
-              <h3>Search Results</h3>
+              <div class="fsa-level@m fsa-level--justify-between">
+                <h3>Search Results</h3>
+
+                <span class="fsa-m-l--xs">
+                  <button @click="showPopover('table-help-popover-123')" class="fsa-btn fsa-btn--flat"
+                    data-behavior="toggle-popover"
+                    data-target="table-help-popover-123">
+                    <svg class="fsa-icon fsa-icon--size-1" aria-hidden="true" focusable="false" role="img" fill="#494440" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"></path>
+                    </svg>
+                  </button>
+                </span>
+
+              </div>
             </caption>
             <thead>
               <tr>
@@ -161,11 +207,9 @@
                 <th scope="col">Tax ID</th>
                 <th scope="col">Payment ID</th>
                 <th scope="col">Amount ($)</th>
-                <th scope="col">Program</th>
                 <th scope="col">Issue Date</th>
-                <th scope="col">Primary Reference</th>
                 <th scope="col">Recieved Date</th>
-                <th scope="col">Action</th>
+                <th scope="col" class="fsa-text-align--right">Actions</th>
               </tr>
             </thead>
             <tbody v-if="searchData">
@@ -174,12 +218,12 @@
                 <td><span class="fsa-text-allcaps">{{ results.taxId }}</span></td>
                 <td><span class="fsa-text-allcaps">{{ results.paymentId }}</span></td>
                 <td><span class="fsa-text-allcaps">{{ results.amount }}</span></td>
-                <td><span class="fsa-text-allcaps">{{ results.program }}</span></td>
                 <td><span class="fsa-text-allcaps">{{ results.issueDate }}</span></td>
-                <td><span class="fsa-text-allcaps">{{ results.primaryRef }}</span></td>
                 <td><span class="fsa-text-allcaps">{{ results.dateReceived }}</span></td>
                 <td>
-                  <button class="fsa-btn fsa-btn--small fsa-btn--secondary">Certify</button>
+                  <div class="fsa-level fsa-level--justify-right fsa-level--gutter-xs">
+                    <button v-for="action in results.actions" :key="action.id" :class="'fsa-btn fsa-btn--small ' +action.btnClass">{{ action.label }}</button>
+                  </div>
                 </td>
               </tr>
             </tbody>
@@ -228,6 +272,7 @@ import { ref, computed, watch, defineAsyncComponent, onMounted } from 'vue';
 import { useStore } from 'vuex';
 import { useNavigation } from '@/composables/useNavigation';
 import { useModalControls } from '@/composables/useModalControls';
+import { usePopoverControls } from '@/composables/usePopoverControls';
 import { v4 as uuidv4 } from 'uuid';
 
 import baseHeader from '@/partials/BaseHeader.vue';
@@ -257,6 +302,8 @@ export default {
       showModal,
       hideModal
     } = useModalControls();
+
+    const { showPopover, hidePopover } = usePopoverControls();
 
     const helpModalId = ref( uuidv4() );
     setModalId(helpModalId.value);
@@ -346,7 +393,9 @@ export default {
       hideModal,
       helpModalId,
       searchData,
-      searchPayments
+      searchPayments,
+      showPopover,
+      hidePopover
     }
   }
 

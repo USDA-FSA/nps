@@ -2,7 +2,7 @@
   <div class="fsa-header-app">
     <div class="fsa-header-app__bd">
       <div class="fsa-header-app__primary">
-        <router-link to="home" class="fsa-header-app__home-link">
+        <router-link to="/" class="fsa-header-app__home-link">
           <span class="fsa-header-app__app-name">
             <abbr class="fsa-header-app__app-abbr" :title="appTitleValue">{{ APP_ABBR_NAME }}</abbr>
             <span class="fsa-header-app__app-full">{{ APP_FULL_NAME }}</span>

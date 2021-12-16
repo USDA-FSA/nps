@@ -1,9 +1,10 @@
 <template>
-  <nav>
+  <nav>    
     <div class="fsa-nav-global">
       <div class="fsa-nav-global__bd">
         <ul class="fsa-nav-global__list" aria-label="Primary Navigation" id="primary-navigation">
           <li v-for="item in navData.main" :key="item.uid" :data-control-id="item.uid" :class="'fsa-nav-global__list-item '+ item.columnClass">
+            <!-- Multicolumn with Headers-->
             <div v-if="item.hasChild=='true' && item.multiColumn=='true' && item.hasHeaders=='true'">
               <button :id="item.uid+'-BTN'" @click="toggleMenu" class="fsa-nav-global__link fsa-nav-global__link--has-sub-menu" type="button" aria-expanded="false" :aria-controls="item.uid">
                 <span class="fsa-nav-global__text" :id="item.uid+'-SUB'">{{item.label}}</span>
@@ -13,7 +14,7 @@
                   <div v-for="child in item.children" :key="child.id" class="fsa-nav-global__sub-menu-group">
                     <h3 class="fsa-nav-global__sub-menu-title" :id="child.uid">{{ child.header }}</h3>
                     <ul class="fsa-nav-global__sub-menu-list" :aria-labelledby="child.uid">
-                      <li v-for="gp in child.group" :key="gp.id" class="fsa-nav-global__sub-menu-item">
+                      <li v-for="gp in child.group" :key="gp.uid" class="fsa-nav-global__sub-menu-item">
                       
                         <a href="#" @click.prevent="goto(gp.path)" class="fsa-nav-global__sub-menu-link">{{ gp.label }}</a>
 
@@ -23,6 +24,7 @@
                 </div>
               </div>
             </div>
+            <!-- Multicolumn No Headers -->
             <div v-else-if="item.hasChild=='true' && item.multiColumn=='true' && item.hasHeaders=='false'">
               <button :id="item.uid+'-BTN'" @click="toggleMenu" class="fsa-nav-global__link fsa-nav-global__link--has-sub-menu" type="button" aria-expanded="false" :aria-controls="item.uid">
                 <span class="fsa-nav-global__text" :id="item.uid+'-SUB'">{{item.label}}</span>
@@ -30,7 +32,7 @@
               <div class="fsa-nav-global__sub-menu" :id="item.uid" aria-hidden="true">
                 <div class="fsa-nav-global__sub-menu-bd">
                   <ul class="fsa-nav-global__sub-menu-list" :aria-labelledby="item.uid+'-SUB'">
-                    <li v-for="child in item.children" :key="child.id" class="fsa-nav-global__sub-menu-item">
+                    <li v-for="child in item.children" :key="child.uid" class="fsa-nav-global__sub-menu-item">
                       
                       <a href="#" @click.prevent="goto(gp.path)" class="fsa-nav-global__sub-menu-link">{{ child.label }}</a>
 
@@ -39,7 +41,29 @@
                 </div>
               </div>
             </div>
-            <div v-else-if="item.hasChild=='true' && item.multiColumn=='false'">
+            <!-- Single Column With Headers -->
+
+            <div v-else-if="item.hasChild=='true' && item.multiColumn=='false' && item.hasHeaders=='true'">
+
+              <button :id="item.uid+'-BTN'" @click="toggleMenu" class="fsa-nav-global__link fsa-nav-global__link--has-sub-menu" type="button" aria-expanded="false" :aria-controls="item.uid">
+                <span class="fsa-nav-global__text" :id="item.uid+'-SUB'">{{item.label}}</span>
+              </button>
+
+              <div class="fsa-nav-global__sub-menu" :id="item.uid" aria-hidden="true">
+
+                <div v-for="child in item.children" :key="child.uid" class="fsa-nav-global__sub-menu-bd" :aria-labelledby="item.uid+'-SUB'">
+                  <h3 class="fsa-nav-global__sub-menu-title" :id="child.uid">{{ child.header }}</h3>
+                  <ul class="fsa-nav-global__sub-menu-list" :aria-labelledby="child.uid">
+                    <li v-for="gp in child.group" :key="gp.uid" class="fsa-nav-global__sub-menu-item">
+                      <a href="#" @click.prevent="goto(gp.path)" class="fsa-nav-global__sub-menu-link">{{ gp.label }}</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- Single Column No Headers -->
+            <div v-else-if="item.hasChild=='true' && item.multiColumn=='false' && item.hasHeaders=='false'">
               <button :id="item.uid+'-BTN'" @click="toggleMenu" class="fsa-nav-global__link fsa-nav-global__link--has-sub-menu" type="button" aria-expanded="false" :aria-controls="item.uid">
                 <span class="fsa-nav-global__text" :id="item.uid+'-SUB'">{{item.label}}</span>
               </button>

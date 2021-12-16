@@ -1,13 +1,24 @@
 <template>
   <div>
 
-    <baseHeader @emitSearch="submitSearch"></baseHeader>
+    <baseHeader></baseHeader>
 
     <main id="main-content" tabindex="-1">
       <div class="fsa-section">
         <div class="fsa-section__bd">
-          <h1>Home Page</h1>
+          <h1>Proto (UX Protyping Kit)</h1>
 
+          <div class="fsa-text--lead">
+          This prototype site is designed to showcase high-fidelity UX process flow. Select from the above Demo links to begin a flow.
+          </div>
+          <div>
+          <p>Currently, only the Other Agency Offset Demos are available to showcase the various Help examples. The Global Help will open a seperate page, while the Page-level and Inline Help buttons will perform as shown. </p>
+          <p>Please ignore the below testing examples below.</p>
+          </div>
+
+          <div class="fsa-divider fsa-divider--stronger fsa-m-b--xl"></div>
+
+          <h3>Testing Purposes Only</h3>
           <div class="fsa-level fsa-level--justify-between fsa-level--align-top">
             <span>
               <field
@@ -23,8 +34,16 @@
                 HELP_MESSAGE="Use your full name, please."
                 ERROR_MESSAGE="Hey, you forgot your name, Buddy!"
                 HAS_ERROR="false"
+                USE_POPOVER="true"
+                POPOVER_TYPE="help"
+                POPOVER_CLASSES="fsa-popover--rt fsa-popover--size-medium"
+                POPOVER_ID="full-name-help-popover-123-456"
+                POPOVER_HEADER="Full Name Help"
                 ref="nameField"
               >
+                <div id="full-name-help-popup-body">
+                  <p>Aut illum nostrum, perspiciatis asperiores esse eveniet earum rem cumque autsit tenetur adipisci. Eos facilis illum qui fugit perspiciatis asperiores esse eveniet earum rem cumque autsit.</p>
+                </div>
               </field>
             </span>
             <span>
@@ -50,8 +69,16 @@
                 ARIA_REQUIRED="false"
                 HELP_MESSAGE="Select your favorite."
                 ERROR_MESSAGE="Why don't you like my pies?"
+                USE_POPOVER="true"
+                POPOVER_TYPE="help"
+                POPOVER_CLASSES="fsa-popover--rt fsa-popover--size-small"
+                POPOVER_ID="pies-help-popover-123-456"
+                POPOVER_HEADER="Pies Help"
                 ref="pieField"
               >
+                <div id="pies-help-popup-body">
+                  <p>Aut illum nostrum, perspiciatis asperiores esse eveniet earum rem cumque autsit tenetur adipisci. Eos facilis illum qui fugit perspiciatis asperiores esse eveniet earum rem cumque autsit.</p>
+                </div>
               </field-group>
             </span>
             <span>
@@ -74,8 +101,16 @@
                 ARIA_REQUIRED="true"
                 HELP_MESSAGE="Select your ride."
                 ERROR_MESSAGE="You must like walking!"
+                USE_POPOVER="true"
+                POPOVER_TYPE="info"
+                POPOVER_CLASSES="fsa-popover--tr fsa-popover--size-small"
+                POPOVER_ID="vehicle-help-popover-123-456"
+                POPOVER_HEADER="Vehicles Information"
                 ref="vehicleField"
               >
+                <div id="vehicle-help-popup-body">
+                  <p>Did you know the automobile was once slower than the horse?</p>
+                </div>
               </selection>
             </span>
             <span>
@@ -86,6 +121,7 @@
           </div>
 
           <div class="fsa-level fsa-level--justify-between fsa-level--align-top">
+          
             <span>
               <selectMulti
                 ID="animal"
@@ -113,6 +149,7 @@
       <div class="fsa-section">
         <div class="fsa-section__bd">
           <h2>{{headerText}}</h2>
+          
           <span class="fsa-m-t--l">{{searchResults}}</span>
         </div>
       </div>
@@ -134,7 +171,8 @@ import baseFooter from '@/partials/BaseFooter.vue';
 const field = defineAsyncComponent(() => import('@/components/field/field.vue'));
 const fieldGroup = defineAsyncComponent(() => import('@/components/field-group/field-group.vue'));
 const selection = defineAsyncComponent(() => import('@/components/selection/selection.vue'));
-const selectMulti = defineAsyncComponent(() => import('@/components/select-multi/select-multi.vue'))
+const selectMulti = defineAsyncComponent(() => import('@/components/select-multi/select-multi.vue'));
+const inlineHelp = defineAsyncComponent(() => import('@/components/inline-help/inline-help.vue'));
  
 export default {
   components: {
@@ -143,7 +181,8 @@ export default {
     field,
     fieldGroup,
     selection,
-    selectMulti
+    selectMulti,
+    inlineHelp
   },
 
   setup(props){

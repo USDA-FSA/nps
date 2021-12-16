@@ -1,13 +1,23 @@
 <template>
   <div>
 
-    <baseHeader NAV_TYPE="inline-help"></baseHeader>
+    <baseHeader NAV_TYPE="page-level-help"></baseHeader>
 
     <main id="main-content" tabindex="-1">
       <div class="fsa-section">
         <div class="fsa-section__bd">
           <div class="fsa-m-t--l">
-            <h1 class="fsa-m--none">Payments Dashboard</h1>
+            <div class="fsa-level@m fsa-level--justify-between">
+              <h1 class="fsa-m--none">Payments Dashboard</h1>
+              <div class="fsa-level fsa-level--justify-between fsa-level--grow-auto">
+                <span>
+                  <button @click="showModal(helpModalId)" class="fsa-btn fsa-btn--block fsa-btn--flat" type="button">
+                    <svg class="fsa-icon fsa-icon--size-1" aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"></path></svg>
+                    Help
+                  </button>
+                </span>
+              </div>
+            </div>
           </div>
 
         </div>
@@ -108,6 +118,7 @@
                   </selection>
 
                   <field
+                    @emitInputUpdate="catchUpdate"
                     ID="tax-id-2323"
                     EXTRA_CLASSES=""
                     LABEL="Tax ID"
@@ -143,15 +154,19 @@
               </div>
               
             <div class="fsa-field">
-              <button @click="searchPayments" type="submit" class="fsa-btn fsa-btn--primary">Search</button>
+              <button @click="searchPayments" :id="searchButtonId" class="fsa-btn fsa-btn--primary" type="button" :disabled='isSearchDisabled'>Search</button>
             </div>
           </div>
           <!-- SEARCH END-->
 
+          
+
           <!-- Results Table START -->
           <table class="fsa-table">
             <caption>
-              <h3>Search Results</h3>
+              <div class="fsa-level@m fsa-level--justify-between">
+                <h3>Search Results</h3>
+              </div>
             </caption>
             <thead>
               <tr>
@@ -161,11 +176,9 @@
                 <th scope="col">Tax ID</th>
                 <th scope="col">Payment ID</th>
                 <th scope="col">Amount ($)</th>
-                <th scope="col">Program</th>
                 <th scope="col">Issue Date</th>
-                <th scope="col">Primary Reference</th>
                 <th scope="col">Recieved Date</th>
-                <th scope="col">Action</th>
+                <th scope="col" class="fsa-text-align--right">Actions</th>
               </tr>
             </thead>
             <tbody v-if="searchData">
@@ -174,12 +187,12 @@
                 <td><span class="fsa-text-allcaps">{{ results.taxId }}</span></td>
                 <td><span class="fsa-text-allcaps">{{ results.paymentId }}</span></td>
                 <td><span class="fsa-text-allcaps">{{ results.amount }}</span></td>
-                <td><span class="fsa-text-allcaps">{{ results.program }}</span></td>
                 <td><span class="fsa-text-allcaps">{{ results.issueDate }}</span></td>
-                <td><span class="fsa-text-allcaps">{{ results.primaryRef }}</span></td>
                 <td><span class="fsa-text-allcaps">{{ results.dateReceived }}</span></td>
                 <td>
-                  <button class="fsa-btn fsa-btn--small fsa-btn--secondary">Certify</button>
+                  <div class="fsa-level fsa-level--justify-right fsa-level--gutter-xs">
+                    <button @click="doAction(action.action)" v-for="action in results.actions" :key="action.id" :class="'fsa-btn fsa-btn--small ' +action.btnClass">{{ action.label }}</button>
+                  </div>
                 </td>
               </tr>
             </tbody>
@@ -237,6 +250,8 @@ const field = defineAsyncComponent(() => import('@/components/field/field.vue'))
 const fieldGroup = defineAsyncComponent(() => import('@/components/field-group/field-group.vue'));
 const selection = defineAsyncComponent(() => import('@/components/selection/selection.vue'));
 
+const inlineHelp = defineAsyncComponent(() => import('@/components/inline-help/inline-help.vue'));
+
 const pageLevelHelpModal = defineAsyncComponent(() => import('@/views/demos/help/Page-Level-Help-Modal.vue'));
  
 export default {
@@ -245,6 +260,7 @@ export default {
     baseFooter,
     field,
     selection,
+    inlineHelp,
     pageLevelHelpModal
   },
 
@@ -259,6 +275,7 @@ export default {
     } = useModalControls();
 
     const helpModalId = ref( uuidv4() );
+    const tableInlineHelpId = ref( uuidv4() );
     setModalId(helpModalId.value);
 
     const stateField = ref(null);
@@ -297,10 +314,12 @@ export default {
     const searchResults = computed( () => store.getters['search/getSearchResults'] );
 
     let searchData = ref([]);
+    const searchButtonId = ref( uuidv4() );
+    const isSearchDisabled = ref(true);
     let isSortAsc = ref(true);
 
     const getSearchData = () => {
-      store.dispatch('search/setSearch', { type:'payments' } );
+      store.dispatch('search/setSearch', { type:'payments-page-level' } );
     }
 
     const toggleSort = (e) => {
@@ -319,9 +338,29 @@ export default {
       }
     }
 
-    const searchPayments = () => {
-      console.log('searchPayments');
-      getSearchData();
+    const enableSearchButton = () => { isSearchDisabled.value = false }
+    const disableSearchButton = () => { isSearchDisabled.value = true }
+    const searchPayments = () => { getSearchData() }
+    const catchUpdate = (val) => {
+      if(val != '') enableSearchButton();
+      else disableSearchButton();
+    }
+
+    const doAction = (action) => {
+      if(action!=null){
+        let type = action.type;
+        let val = action.val;
+        switch(type){
+          case 'goto':
+            goto(val);
+            break;
+          case 'alert':
+            alert(val);
+            break;
+          default:
+            break;
+        }
+      }
     }
 
     watch(searchResults, (val) => {
@@ -345,8 +384,13 @@ export default {
       showModal,
       hideModal,
       helpModalId,
+      tableInlineHelpId,
       searchData,
-      searchPayments
+      searchPayments,
+      searchButtonId,
+      isSearchDisabled,
+      catchUpdate,
+      doAction
     }
   }
 

@@ -1,25 +1,14 @@
 <template>
   <div>
 
-    <baseHeader NAV_URL="/api/nps-page-level-help.json"></baseHeader>
+    <baseHeader NAV_TYPE="inline-help"></baseHeader>
 
     <main id="main-content" tabindex="-1">
       <div class="fsa-section">
         <div class="fsa-section__bd">
           <div class="fsa-m-t--l">
-            <div class="fsa-level@m fsa-level--justify-between">
-              <h1 class="fsa-m--none">Payment Certification Approval</h1>
-              <div class="fsa-level fsa-level--justify-between fsa-level--grow-auto">
-                <span>
-                  <button @click="showModal(helpModalId)" class="fsa-btn fsa-btn--block fsa-btn--flat" type="button">
-                    <svg class="fsa-icon fsa-icon--size-1" aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"></path></svg>
-                    Help
-                  </button>
-                </span>
-              </div>
-            </div>
+            <h1 class="fsa-m--none">Payment Certification Approval</h1>
           </div>
-
         </div>
       </div>
       <div class="fsa-section">
@@ -65,7 +54,11 @@
       <div class="fsa-growl-container fsa-growl-container--centered">
         <div class="fsa-growl fsa-growl--error fsa-growl--centered" id="UNIQUE-ID-9469E21387FAF609" aria-hidden="true" tabindex="0" role="alertdialog">
           <div class="fsa-growl__hd">
-            <button class="fsa-growl__close" data-behavior="growl-dismiss whiteout-dismiss" type="button"><img class="fsa-growl__close-icon" src="/fsa-design-system/img/close.svg" alt="close"></button>
+            <button class="fsa-growl__close" data-behavior="growl-dismiss whiteout-dismiss" type="button">
+              <svg class="fsa-icon fsa-icon--size-3" aria-hidden="true" focusable="false" role="img" fill="#494440" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
+              </svg>
+            </button>
             <h2 class="fsa-growl__title">Cancel Process</h2>
           </div>
           <div class="fsa-growl__bd">
@@ -99,7 +92,7 @@ import baseFooter from '@/partials/BaseFooter.vue';
 const field = defineAsyncComponent(() => import('@/components/field/field.vue'));
 const fieldGroup = defineAsyncComponent(() => import('@/components/field-group/field-group.vue'));
 const selection = defineAsyncComponent(() => import('@/components/selection/selection.vue'));
-const appData = defineAsyncComponent(() => import('@/views/demos/help/App-Data.vue'));
+const appData = defineAsyncComponent(() => import('@/views/demos/shared/App-Data.vue'));
 
 const steppedControl = defineAsyncComponent(() => import('@/components/stepped-control/stepped-control.vue'));
 
