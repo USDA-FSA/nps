@@ -3,7 +3,6 @@
 export function usePopoverControls() {
 
   const showPopover = (id) => {
-    console.log('popover id',id)
     document.getElementById(id).setAttribute('aria-hidden', 'false');
     document.getElementById(id).classList.add('fsa-popover--visible');
   }

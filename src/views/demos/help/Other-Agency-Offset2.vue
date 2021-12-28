@@ -76,7 +76,7 @@
               HELP_MESSAGE=""
               ERROR_MESSAGE="Hey, you forgot the amount"
               HAS_ERROR="false"
-              ref="payeeNamField"
+              ref="payeeNameField"
             >
             </field>
 
@@ -217,23 +217,23 @@
                 <th scope="col" class="fsa-text-align--right">Actions</th>
               </tr>
             </thead>
-            <tbody v-if="showAddedOffset">
-              <tr >
-                <td><span class="fsa-text-allcaps">{{ addedOffsetList.agencyName }}</span></td>
-                <td><span class="fsa-text-allcaps">{{ addedOffsetList.offsetAmount }}</span></td>
+            <tbody v-if="offsetListData">
+              <tr v-for="item in offsetListData" :key="item.id" :id="item.id">
+                <td><span class="fsa-text-allcaps">{{ item.payeeName }}</span></td>
+                <td><span class="fsa-text-allcaps">{{ item.offsetAmount }}</span></td>
                 <td>
-                  <span class="fsa-text-allcaps">{{ addedOffsetList.address1 }}</span>
-                  <span class="fsa-text-allcaps">{{ addedOffsetList.address2 }}</span>
+                  <span class="fsa-text-allcaps">{{ item.address1 }}</span>
+                  <span class="fsa-text-allcaps">{{ item.address2 }}</span>
                   <div class="fsa-level">
-                    <span class="fsa-text-allcaps">{{ addedOffsetList.city }}</span>
-                    <span class="fsa-text-allcaps">{{ addedOffsetList.state }}</span>
-                    <span class="fsa-text-allcaps">{{ addedOffsetList.zip }}</span>
+                    <span class="fsa-text-allcaps">{{ item.city }}</span>
+                    <span class="fsa-text-allcaps">{{ item.state }}</span>
+                    <span class="fsa-text-allcaps">{{ item.zip }}</span>
                   </div>
                 </td>
                 <td>
                   <div class="fsa-level fsa-level--justify-right fsa-level--gutter-xs">
-                    <button class="fsa-btn fsa-btn--secondary fsa-btn--small">Modify</button>
-                    <button class="fsa-btn fsa-btn--secondary fsa-btn--small">Delete</button>
+                    <button @click="modifyOffset(item)" class="fsa-btn fsa-btn--secondary fsa-btn--small">Modify</button>
+                    <button @click="deleteOffset(item)" class="fsa-btn fsa-btn--secondary fsa-btn--small">Delete</button>
                   </div>
                 </td>
               </tr>
@@ -364,6 +364,7 @@ export default {
     const stateField = ref(null);
     const stateId = ref(uuidv4());
     const stateData = [
+      { id: "state0", label: "Select a State", name: "stateGroup", val: 0 },
       { id: "state1", label: "Alabama", name: "stateGroup" },
       { id: "state2", label: "Alaska", name: "stateGroup" },
       { id: "state3", label: "Arizona", name: "stateGroup" },
@@ -377,7 +378,6 @@ export default {
     const doNotApplyPaymentId = ref(uuidv4());
     const toggleDoNotApplyPayment = () => {
       let cb = document.getElementById(doNotApplyPaymentId.value);
-      console.log(cb)
       if(cb.checked) disableAddPaymentButton()
       else enableAddPaymentButton()
     }
@@ -390,20 +390,43 @@ export default {
 
     const tableOffsetAgencyListId = ref(uuidv4());
     const showAddedOffset = ref(false);
-    const addedOffsetList = ref({});
+
+    const offsetListData = ref([]);
+
     const addToPayment = () => {
       let obj = {
-        agencyName: document.getElementById(payeeNameId.value).value,
+        id: uuidv4(),
+        payeeName: document.getElementById(payeeNameId.value).value,
         offsetAmount: document.getElementById(offsetAmountId.value).value,
         address1: document.getElementById(address1Id.value).value,
         address2: document.getElementById(address2Id.value).value,
         city: document.getElementById(cityId.value).value,
-        state: document.getElementById(stateId.value).value,
+        state: document.getElementById(stateId.value).value != 0 ? document.getElementById(stateId.value).value : '',
         zip: document.getElementById(zipId.value).value,
       }
+      document.getElementById(payeeNameId.value).value = '';
+      document.getElementById(offsetAmountId.value).value = '';
+      document.getElementById(address1Id.value).value = '';
+      document.getElementById(address2Id.value).value = '';
+      document.getElementById(cityId.value).value = '';
+      document.getElementById(stateId.value).value = 0;
+      document.getElementById(zipId.value).value = '';
 
-      addedOffsetList.value = obj;
+      offsetListData.value.push(obj)
       showAddedOffset.value = true;
+    }
+
+    const modifyOffset = (obj) => {
+      let id = obj.id;
+      alert('SHOW MODAL FOR '+obj.payeeName);
+    }
+
+    const deleteOffset = (obj) => {
+      let id = obj.id;
+      if( confirm( 'Delete Offset Entry for '+ obj.payeeName + '?' )){
+        let arr = offsetListData.value;
+        offsetListData.value = arr.filter( item => item.id != id );
+      }
     }
 
     onMounted(()=>{
@@ -432,12 +455,14 @@ export default {
       tableOffsetAgencyListId,
       showAddedOffset,
       addToPayment,
-      addedOffsetList,
+      offsetListData,
       toggleDoNotApplyPayment,
       doNotApplyPaymentId,
       doNotApplyPaymentPopoverId,
       isAddPaymentDisabled,
-      addToPaymentButtonId
+      addToPaymentButtonId,
+      modifyOffset,
+      deleteOffset
     }
   }
 

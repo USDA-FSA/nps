@@ -97,9 +97,7 @@ export default {
 
     const { showPopover, hidePopover } = usePopoverControls();
 
-    const updateInput = (e) => {
-      console.log('updateInput',e.target);
-      
+    const updateInput = (e) => {      
       emit('emitInputUpdate', e.target.value)
     }
 
