@@ -1,12 +1,20 @@
 {
-  "name": "npm",
+  "name": "nps",
   "version": "1.0.0",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview",
-    "deploy": "sh deploy.sh"
+    "deploy": "gh-pages -d dist"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/USDA-FSA/nps.git"
+  },
+  "author": "USDA FSA Enterprise Architecture",
+  "contributors": [
+    "Casey Hill <bignamehere@gmail.com> (https://github.com/bignamehere)"
+  ],
   "dependencies": {
     "fsa-style": "^2.6.1",
     "uuid": "^8.3.2",
@@ -18,6 +26,7 @@
     "@vitejs/plugin-vue": "^1.2.1",
     "@vue/compiler-sfc": "^3.0.5",
     "fs": "0.0.1-security",
+    "gh-pages": "^3.2.3",
     "path": "^0.12.7",
     "sass": "^1.32.8",
     "vite": "^2.4.4"
