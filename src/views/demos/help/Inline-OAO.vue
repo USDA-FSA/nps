@@ -6,7 +6,9 @@
     <main id="main-content" tabindex="-1">
       <div class="fsa-section">
         <div class="fsa-section__bd">
-          <h1 class="fsa-m--none">Payments Dashboard</h1>
+          <div class="fsa-m-t--l">
+            <h1>Payments Dashboard</h1>
+          </div>
         </div>
       </div>
       <div class="fsa-section">
@@ -166,6 +168,7 @@
                   POPOVER_TYPE="help"
                   POPOVER_CLASSES="fsa-popover--tr fsa-popover--size-large"
                   :POPOVER_ID="tableInlineHelpId"
+                  ICON_SIZE="fsa-icon--size-2"
                   POPOVER_HEADER="Action Buttons Help">
                   <div id="pies-help-popup-body">
                     <p><strong>Other Agency Offset</strong> - Use this button to perform Aut illum nostrum, perspiciatis asperiores.</p>

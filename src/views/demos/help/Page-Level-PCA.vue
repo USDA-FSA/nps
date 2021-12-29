@@ -30,27 +30,90 @@
           <!-- App Data END-->
 
           
-        </div>
-      </div>
-      
-      <div class="fsa-section">
-        <div class="fsa-section__bd">
 
-          <stepped-control
-            EXTRA_CLASSES="fsa-stepped-control--sticky"
-            DISPLAY_MESSAGE="true"
-            CURRENT_STEP="1"
-            TOTAL_STEPS="5"
-            BACK_LABEL="Back"
-            BACK_URL="/"
-            USE_GROWL_ON_CANCEL="true"
-            GROWL_ID="stepped-control-growl-id"
-            URL_PREFIX="fsa"
-            USE_GROWL_ON_SUBMIT="true"
-            ON_SUBMIT_GROWL_ID="stepped-control-submit-growl-id"
-            CONTINUE_LABEL="Continue"
-            CONTINUE_URL="/demo/modal-growl/">
-          </stepped-control>
+          <h3>Original Payment Summary</h3>
+          
+          <div class="fsa-section">
+            <div class="fsa-section__bd">
+              <table class="fsa-table fsa-table--borderless fsa-table--responsive fsa-table--responsive-horizontal">
+                <thead>
+                  <tr>
+                    <th scope="col">Alternate Payee</th>
+                    <th scope="col">Address</th>
+                    <th scope="col" class="fsa-text-align--right">Amount($)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th aria-label="Alternate Payee" scope="row"><span class="fsa-text-allcaps">Joe Collinsworth</span></th>
+                    <td aria-label="Address">
+                      <span class="fsa-text-allcaps">4325 E Huckerburn RD</span>
+                      <span class="fsa-text-allcaps"></span>
+                      <div class="fsa-level">
+                        <span class="fsa-text-allcaps">Malhogany</span>
+                        <span class="fsa-text-allcaps">MO</span>
+                        <span class="fsa-text-allcaps">62109</span>
+                      </div>
+                    </td>
+                    <td aria-label="Amount($)" class="fsa-text-align--right"><span class="fsa-text-allcaps">(-) 135.50</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="fsa-section fsa-section--dark">
+            <div class="fsa-section__bd">
+
+              <table class="fsa-table fsa-table--borderless fsa-table--responsive fsa-table--responsive-horizontal">
+                <thead>
+                  <tr>
+                    <th scope="col">Disbursement Payee</th>
+                    <th scope="col">Address</th>
+                    <th scope="col" class="fsa-text-align--right">Amount($)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th aria-label="Disbursement Payee" scope="row"><span class="fsa-text-allcaps">Collinsworth Farms, Inc.</span></th>
+                    <td aria-label="Address">
+                      <span class="fsa-text-allcaps">4325 E Huckerburn RD</span>
+                      <span class="fsa-text-allcaps"></span>
+                      <div class="fsa-level">
+                        <span class="fsa-text-allcaps">Malhogany</span>
+                        <span class="fsa-text-allcaps">MO</span>
+                        <span class="fsa-text-allcaps">62109</span>
+                      </div>
+                    </td>
+                    <td aria-label="Amount($)" class="fsa-text-align--right"><span class="fsa-text-allcaps">135.50</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="fsa-m-t--l">
+            <div class="fsa-level">
+              <span>Action: </span>
+              <span>
+              <selection
+                  :ID="actionsId"
+                  LABEL=""
+                  :DATA="actionsData"
+                  REQUIRED="true"
+                  SELECT_CLASSES="fsa-select--large fsa-select--block"
+                  EXTRA_CLASSES=""
+                  FIELD_ERROR_CLASS=""
+                  ARIA_REQUIRED="true"
+                  HELP_MESSAGE=""
+                  ERROR_MESSAGE=""
+                >
+                </selection>
+              </span>
+              <span class="fsa-m-t--xs">
+                <button class="fsa-btn fsa-btn--primary">Submit</button>
+              </span>            
+            </div>
+          </div>
 
         </div>
       </div>
@@ -100,12 +163,8 @@ import { v4 as uuidv4 } from 'uuid';
 import baseHeader from '@/partials/BaseHeader.vue';
 import baseFooter from '@/partials/BaseFooter.vue';
 
-const field = defineAsyncComponent(() => import('@/components/field/field.vue'));
-const fieldGroup = defineAsyncComponent(() => import('@/components/field-group/field-group.vue'));
 const selection = defineAsyncComponent(() => import('@/components/selection/selection.vue'));
 const appData = defineAsyncComponent(() => import('@/views/demos/shared/App-Data.vue'));
-
-const steppedControl = defineAsyncComponent(() => import('@/components/stepped-control/stepped-control.vue'));
 
 const pageLevelHelpModal = defineAsyncComponent(() => import('@/views/demos/help/Page-Level-Help-Modal.vue'));
  
@@ -113,11 +172,8 @@ export default {
   components: {
     baseHeader,
     baseFooter,
-    field,
-    fieldGroup,
     selection,
     appData,
-    steppedControl,
     pageLevelHelpModal
   },
 
@@ -134,82 +190,28 @@ export default {
     const helpModalId = ref( uuidv4() );
     setModalId(helpModalId.value);
     
-    const nameField = ref(null);
-    
-    const vehicleField = ref(null);
-    const animalField = ref(null);
 
-    const stateField = ref(null);
-    const stateData = [
-      { id: "state1", label: "Alabama", name: "stateGroup" },
-      { id: "state2", label: "Alaska", name: "stateGroup" },
-      { id: "state3", label: "Arizona", name: "stateGroup" },
-      { id: "state4", label: "Arkansas", name: "stateGroup" },
+    const actionsId = ref(uuidv4());
+    const actionsData = [
+      { id: "a0", label: "Select an Action", name: "actionsGroup", val: 0, isDisabled: true, isSelected: true },
+      { id: "a1", label: "Defer", name: "actionsGroup" },
+      { id: "a2", label: "Approve", name: "actionsGroup" },
+      { id: "a3", label: "Reset Payment Processing", name: "actionsGroup" },
+      { id: "a4", label: "Reset Address", name: "actionsGroup" },
+      { id: "a5", label: "Hold for Cancel by Program", name: "actionsGroup" }
     ];
 
-    const countyData = [
-      { id: "county1", label: "Adair", name: "countyGroup" },
-      { id: "county2", label: "Abner", name: "countyGroup" },
-      { id: "county3", label: "Abner", name: "countyGroup" },
-      { id: "county4", label: "Abner", name: "countyGroup" },
-    ];
-
-    const addFiltersData = [
-      { id: "addFilter1", label: "Tax Id", name: "addFilterGroup" },
-      { id: "addFilter2", label: "Name", name: "addFilterGroup" },
-      { id: "addFilter3", label: "All", name: "addFilterGroup" },
-    ];
-
-
-    // Fake Data Code start
-    const usersData = computed( () => store.getters['users/getUsers'] );
-    let users = ref([]);
-    let isSortAsc = ref(true);
-    const getUsersData = () => {
-      store.dispatch('users/getUsersFromApi');
-    }
-
-    const toggleSort = (e) => {
-      let id = e.currentTarget.id;
-      isSortAsc.value = !isSortAsc.value;
-      if(isSortAsc.value){
-        users.value = usersData.value.sort( (a, b) => a.id - b.id );
-        document.getElementById(id).classList.remove('fsa-table__sort--descending')
-        document.getElementById(id).classList.add('fsa-table__sort--ascending')
-        document.getElementById(id).ariaSort = 'ascending'
-      } else {
-        users.value = usersData.value.sort( (a, b) => b.id - a.id );
-        document.getElementById(id).classList.remove('fsa-table__sort--ascending')
-        document.getElementById(id).classList.add('fsa-table__sort--descending')
-        document.getElementById(id).ariaSort = 'descending'
-      }
-    }
-    // Fake Data Code End
-
-    const searchPayments = () => {
-      console.log('searchPayments');
-      getUsersData();
-    }
-
-   
-
-    watch(usersData, (val) => {
-      users.value = val;
-    })
 
     onMounted(()=>{
       console.log('Payments onMounted');
     });
 
     return {
-      nameField,
-      users,
-      getUsersData,
-      toggleSort,
-      searchPayments,
       showModal,
       hideModal,
-      helpModalId
+      helpModalId,
+      actionsId,
+      actionsData
     }
   }
 

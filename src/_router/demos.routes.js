@@ -26,12 +26,12 @@ export const demosRoutes = [
     component: () => import('@/views/demos/help/Inline-PCA.vue')
   },
   { 
-    path: '/demos/help/other-agency-offset',
-    component: () => import('@/views/demos/help/Other-Agency-Offset1.vue')
+    path: '/demos/help/inline-other-agency-offset',
+    component: () => import('@/views/demos/help/Inline-Other-Agency-Offset.vue')
   },
   { 
-    path: '/demos/help/other-agency-offset2',
-    component: () => import('@/views/demos/help/Other-Agency-Offset2.vue')
+    path: '/demos/help/page-level-other-agency-offset',
+    component: () => import('@/views/demos/help/Page-Level-Other-Agency-Offset.vue')
   },
   { 
     path: '/demos/help/manual-handling-worklist',

@@ -25,7 +25,7 @@
 
         <p>The certifying officer will determine whether the payment can be certified. There are five options available to the certifying officer for individual payments and four options for payments associated with a package.</p>
 
-        <h3>Available buttons:</h3>
+        <h3>Available Options:</h3>
         <p><strong>Defer</strong> - do nothing with the payment. It will remain in a deferred status until one of the other options is selected.</p>
 
         <p><strong>Approve</strong> - the certifying officer accepts the payment as displayed.</p>
@@ -39,8 +39,6 @@
         <p><strong>PLEASE NOTE:</strong> Placing an individual payment or a package of payments in the Hold for Cancel by Program status does not delete the payment or the payment package from NPS. Cancellation request for the payment or payment package must be submitted by the originating program application.</p>
 
         <p><strong>Submit</strong> - For payments associated with a package, the user will be returned to the Package Payment Certification Worklist until all payments associated with a package have been certified. Otherwise, the user will be returned to the Payment Certification - Service Center screen. Submit and Continue - complete processing of this payment and display the detail for the next payment to be certified.</p>
-        
-        <p><strong>Exit</strong> - return to the Payment Certification - Service Center screen.</p>
 
         <p><strong>NOTE:</strong> Due to separation of duties, the person who certifies a payment cannot sign the same payment. Please be aware if multiple users certify payments within the same payment package, those users will be unable to sign the payment package.</p>
 

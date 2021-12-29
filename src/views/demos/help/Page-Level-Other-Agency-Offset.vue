@@ -1,14 +1,25 @@
 <template>
   <div>
 
-    <baseHeader NAV_TYPE="inline-help"></baseHeader>
+    <baseHeader NAV_TYPE="page-level-help"></baseHeader>
 
     <main id="main-content" tabindex="-1">
       <div class="fsa-section">
         <div class="fsa-section__bd">
           <div class="fsa-m-t--l">
-            <h1 class="fsa-m--none">Other Agency Offset</h1>
+            <div class="fsa-level@m fsa-level--justify-between">
+              <h1 class="fsa-m--none">Payments Dashboard</h1>
+              <div class="fsa-level fsa-level--justify-between fsa-level--grow-auto">
+                <span>
+                  <button @click="showModal(helpModalId)" class="fsa-btn fsa-btn--block fsa-btn--flat" type="button">
+                    <svg class="fsa-icon fsa-icon--size-1" aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"></path></svg>
+                    Help
+                  </button>
+                </span>
+              </div>
+            </div>
           </div>
+
         </div>
       </div>
       <div class="fsa-section">
@@ -48,16 +59,8 @@
               HELP_MESSAGE=""
               ERROR_MESSAGE="Hey, you forgot the amount"
               HAS_ERROR="false"
-              USE_POPOVER="true"
-              POPOVER_TYPE="help"
-              POPOVER_CLASSES="fsa-popover--tr fsa-popover--size-small"
-              :POPOVER_ID="offsetAmountId+'-help-popover'"
-              POPOVER_HEADER="Offset Amount Help"
               ref="offsetAmountField"
             >
-              <div :id="offsetAmountId + '-popup-body'">
-                <p><strong>Note:</strong> Amount of the offset can be up to the Remaining Amount. An error will be encountered for any amount exceeding the Remaining Amount.</p>
-              </div>
             </field>
 
             <field
@@ -73,16 +76,8 @@
               HELP_MESSAGE=""
               ERROR_MESSAGE="Hey, you forgot the amount"
               HAS_ERROR="false"
-              USE_POPOVER="true"
-              POPOVER_TYPE="help"
-              POPOVER_CLASSES="fsa-popover--tr fsa-popover--size-small"
-              :POPOVER_ID="payeeNameId+'-help-popover'"
-              POPOVER_HEADER="Payee Name Help"
-              ref="payeeNamField"
+              ref="payeeNameField"
             >
-              <div :id="payeeNameId + '-popup-body'">
-                <p>The Payee field is required to Aut illum nostrum, perspiciatis asperiores esse eveniet earum rem cumque autsit tenetur adipisci</p>
-              </div>
             </field>
 
           </div>
@@ -191,30 +186,11 @@
             <span class="fsa-level">
               <input @change="toggleDoNotApplyPayment" class="fsa-checkbox" :id="doNotApplyPaymentId" type="checkbox" name="doNotApplyPaymentId">
               <label :for="doNotApplyPaymentId">Do not Apply Payment to Other Agency Offset</label>
-              <inline-help
-                  POPOVER_TYPE="help"
-                  POPOVER_CLASSES="fsa-popover--tc fsa-popover--size-medium"
-                  :POPOVER_ID="doNotApplyPaymentPopoverId"
-                  POPOVER_HEADER="Do Not Apply Payment Help">
-                  <div id="oao-tabel-help-popup-body">
-                    <p>If no other agency offset is to be taken from this payment, select the "Do not Apply Payment to Other Agency Offset" checkbox, and then select the "Save" button.</p>
-                    <p><strong>Note:</strong> By selecting this checkbox, the "Add to Payment" feature is disabled.</p>
-                  </div>
-                </inline-help>
             </span>
           </div>
 
           <div class="fsa-level fsa-m-t--m">
             <button @click="addToPayment" :disabled="isAddPaymentDisabled" class="fsa-btn fsa-btn--secondary" type="button">Add to Payment</button>
-            <inline-help
-              POPOVER_TYPE="help"
-              POPOVER_CLASSES="fsa-popover--tc fsa-popover--size-medium"
-              :POPOVER_ID="addToPaymentButtonId"
-              POPOVER_HEADER="Do Not Apply Payment Help">
-              <div id="oao-tabel-help-popup-body">
-                <p><strong>Add to Payment</strong> - Select "Add to Payment" button to capture the initial offset information and refesh the screen. Subsequent offsets can occure until all Other Agency Debt has been satisfied or the Remaining Amount has been liquidated.</p>
-              </div>
-            </inline-help>
           </div>
 
         </div>
@@ -228,20 +204,7 @@
             <caption>
               <div class="fsa-level@m fsa-level--justify-between">
                 <h3>Other Agency Offset List</h3>
-                <inline-help
-                  POPOVER_TYPE="help"
-                  POPOVER_CLASSES="fsa-popover--tr fsa-popover--size-large"
-                  :POPOVER_ID="tableOffsetAgencyListId"
-                  POPOVER_HEADER="Action Buttons Help">
-                  <div id="oao-tabel-help-popup-body">
-                    
-                    <p><strong>Modify</strong> - Select "Modify" if the other agency offset information needs to be edited.</p>
-                    <p><strong>Delete</strong> - Select "Delete" to remove the other agency offset.</p>
-                    <p><strong>Save</strong> - When completed, select the "Save" button to apply the offset amount.</p>
-                    <p>If a customer has more than one Other Agency Dept, multiple offsets can be created providing the Remaining Amount has not been liquidated yet.</p>
-                    
-                  </div>
-                </inline-help>
+
               </div>
             </caption>
             <thead>
@@ -303,6 +266,8 @@
         </div>
       </div>
 
+      
+      <page-level-help-modal :MODAL_ID="helpModalId"></page-level-help-modal>
 
       <!-- PLACE JUST BELOW BODY START TAG AT THE BEGINNING OF DOCUMENT -->
       <div class="fsa-whiteout" tabindex="-1" id="fsa-whiteout" aria-hidden="true"></div>
@@ -328,6 +293,7 @@
           </div>
         </div>
       </div>
+      
 
     </main>
 
@@ -339,6 +305,7 @@
 import { ref, computed, watch, defineAsyncComponent, onMounted } from 'vue';
 import { useStore } from 'vuex';
 import { useNavigation } from '@/composables/useNavigation';
+import { useModalControls } from '@/composables/useModalControls';
 import { v4 as uuidv4 } from 'uuid';
 
 import baseHeader from '@/partials/BaseHeader.vue';
@@ -349,7 +316,7 @@ const fieldGroup = defineAsyncComponent(() => import('@/components/field-group/f
 const selection = defineAsyncComponent(() => import('@/components/selection/selection.vue'));
 const appData = defineAsyncComponent(() => import('@/views/demos/shared/App-Data.vue'));
 
-const inlineHelp = defineAsyncComponent(() => import('@/components/inline-help/inline-help.vue'));
+const pageLevelHelpModal = defineAsyncComponent(() => import('@/views/demos/help/Page-Level-Help-Modal.vue'));
 
 const steppedControl = defineAsyncComponent(() => import('@/components/stepped-control/stepped-control.vue'));
 
@@ -362,13 +329,22 @@ export default {
     fieldGroup,
     selection,
     appData,
-    inlineHelp,
+    pageLevelHelpModal,
     steppedControl,
   },
 
   setup(props){
     const store = useStore();
     const { goto } = useNavigation();
+    const {
+      setModalId,
+      getModalId,
+      showModal,
+      hideModal
+    } = useModalControls();
+
+    const helpModalId = ref( uuidv4() );
+    setModalId(helpModalId.value);
     
     const offsetAmountField = ref(null);
     const offsetAmountId = ref(uuidv4());
@@ -388,7 +364,7 @@ export default {
     const stateField = ref(null);
     const stateId = ref(uuidv4());
     const stateData = [
-      { id: "state0", label: "Select a State", name: "stateGroup", val: 0 },
+      { id: "state0", label: "Select a State", name: "stateGroup", val: 0, isDisabled: true, isSelected: true },
       { id: "state1", label: "Alabama", name: "stateGroup" },
       { id: "state2", label: "Alaska", name: "stateGroup" },
       { id: "state3", label: "Arizona", name: "stateGroup" },
@@ -414,7 +390,7 @@ export default {
 
     const tableOffsetAgencyListId = ref(uuidv4());
     const showAddedOffset = ref(false);
-    
+
     const offsetListData = ref([]);
 
     const addToPayment = () => {
@@ -458,6 +434,9 @@ export default {
     });
 
     return {
+      helpModalId,
+      showModal,
+      hideModal,
       offsetAmountField,
       offsetAmountId,
       payeeNameField,

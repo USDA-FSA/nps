@@ -18,57 +18,118 @@
           <app-data></app-data>
           <!-- App Data END-->
 
-          
-        </div>
-      </div>
-      
-      <div class="fsa-section">
-        <div class="fsa-section__bd">
-
-          <stepped-control
-            EXTRA_CLASSES="fsa-stepped-control--sticky"
-            DISPLAY_MESSAGE="true"
-            CURRENT_STEP="1"
-            TOTAL_STEPS="5"
-            BACK_LABEL="Back"
-            BACK_URL="/"
-            USE_GROWL_ON_CANCEL="true"
-            GROWL_ID="stepped-control-growl-id"
-            URL_PREFIX="fsa"
-            USE_GROWL_ON_SUBMIT="true"
-            ON_SUBMIT_GROWL_ID="stepped-control-submit-growl-id"
-            CONTINUE_LABEL="Continue"
-            CONTINUE_URL="/demo/modal-growl/">
-          </stepped-control>
-
-        </div>
-      </div>
-
-      
-      <page-level-help-modal :MODAL_ID="helpModalId"></page-level-help-modal>
-
-      <!-- PLACE JUST BELOW BODY START TAG AT THE BEGINNING OF DOCUMENT -->
-      <div class="fsa-whiteout" tabindex="-1" id="fsa-whiteout" aria-hidden="true"></div>
-      <!-- END WHITEOUT -->
-
-      <div class="fsa-growl-container fsa-growl-container--centered">
-        <div class="fsa-growl fsa-growl--error fsa-growl--centered" id="UNIQUE-ID-9469E21387FAF609" aria-hidden="true" tabindex="0" role="alertdialog">
-          <div class="fsa-growl__hd">
-            <button class="fsa-growl__close" data-behavior="growl-dismiss whiteout-dismiss" type="button">
-              <svg class="fsa-icon fsa-icon--size-3" aria-hidden="true" focusable="false" role="img" fill="#494440" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
-              </svg>
-            </button>
-            <h2 class="fsa-growl__title">Cancel Process</h2>
+          <div class="fsa-level@m fsa-level--justify-between fsa-level--align-bottom">
+            <span class="">
+              <h3>Original Payment Summary</h3>
+            </span>
+            <span class="fsa-m-r--s">
+              <inline-help
+                POPOVER_TYPE="help"
+                POPOVER_CLASSES="fsa-popover--lt fsa-popover--size-large"
+                ICON_SIZE="fsa-icon--size-2"
+                :POPOVER_ID="summaryInlineHelpId"
+                POPOVER_HEADER="Summary Help">
+                <div id="summary-help-popup-body">
+                  <p>Producer Disbursement will display the amount payable to the customer. No Prompt Pay Interest amount will be included due to the calculation of PPI being moved to after a payment has been signed. If customer name was modified as part of the Deceased Producer Manual Handling step, verify the customer name is displayed as intended. If customer address or assignee address was modified due to it being a foreign address, verify address is displayed as intended.</p>
+                  <p><strong>NOTE:</strong> If a joint payment has been established for this program payment, both the customer name and joint payee will be displayed in this area.</p>
+                  <p>The certifying officer will determine whether the payment can be certified. There are five options available to the certifying officer for individual payments and four options for payments associated with a package.</p>
+                </div>
+              </inline-help>
+            </span>
           </div>
-          <div class="fsa-growl__bd">
-            <p>Message goes here if you like or something, <a href="link.html">with a link</a> if necessary.</p>
-            <p>And another line here for kicks.</p>
-            <p>
-              <button data-behavior="growl-dismiss whiteout-dismiss" class="fsa-btn fsa-btn--small fsa-btn--secondary" type="button">Button</button>
-              <a class="fsa-btn fsa-btn--small fsa-btn--secondary" href="link.html">Button link</a>
-            </p>
+          <div class="fsa-section">
+            <div class="fsa-section__bd">
+              <table class="fsa-table fsa-table--borderless fsa-table--responsive fsa-table--responsive-horizontal">
+                <thead>
+                  <tr>
+                    <th scope="col">Alternate Payee</th>
+                    <th scope="col">Address</th>
+                    <th scope="col" class="fsa-text-align--right">Amount($)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th aria-label="Alternate Payee" scope="row"><span class="fsa-text-allcaps">Joe Collinsworth</span></th>
+                    <td aria-label="Address">
+                      <span class="fsa-text-allcaps">4325 E Huckerburn RD</span>
+                      <span class="fsa-text-allcaps"></span>
+                      <div class="fsa-level">
+                        <span class="fsa-text-allcaps">Malhogany</span>
+                        <span class="fsa-text-allcaps">MO</span>
+                        <span class="fsa-text-allcaps">62109</span>
+                      </div>
+                    </td>
+                    <td aria-label="Amount($)" class="fsa-text-align--right"><span class="fsa-text-allcaps">(-) 135.50</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
+          <div class="fsa-section fsa-section--dark">
+            <div class="fsa-section__bd">
+
+              <table class="fsa-table fsa-table--borderless fsa-table--responsive fsa-table--responsive-horizontal">
+                <thead>
+                  <tr>
+                    <th scope="col">Disbursement Payee</th>
+                    <th scope="col">Address</th>
+                    <th scope="col" class="fsa-text-align--right">Amount($)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th aria-label="Disbursement Payee" scope="row"><span class="fsa-text-allcaps">Collinsworth Farms, Inc.</span></th>
+                    <td aria-label="Address">
+                      <span class="fsa-text-allcaps">4325 E Huckerburn RD</span>
+                      <span class="fsa-text-allcaps"></span>
+                      <div class="fsa-level">
+                        <span class="fsa-text-allcaps">Malhogany</span>
+                        <span class="fsa-text-allcaps">MO</span>
+                        <span class="fsa-text-allcaps">62109</span>
+                      </div>
+                    </td>
+                    <td aria-label="Amount($)" class="fsa-text-align--right"><span class="fsa-text-allcaps">135.50</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="fsa-m-t--l">
+            <div class="fsa-level">
+              <span>Action: </span>
+              <span>
+                <selection
+                  :ID="actionsId"
+                  LABEL=""
+                  :DATA="actionsData"
+                  REQUIRED="true"
+                  SELECT_CLASSES="fsa-select--large fsa-select--block"
+                  EXTRA_CLASSES=""
+                  FIELD_ERROR_CLASS=""
+                  ARIA_REQUIRED="true"
+                  HELP_MESSAGE=""
+                  ERROR_MESSAGE=""
+                  USE_POPOVER="true"
+                  POPOVER_TYPE="help"
+                  POPOVER_CLASSES="fsa-popover--rb fsa-popover--size-large"
+                  :POPOVER_ID="actionsId+'-help-popover'"
+                  POPOVER_HEADER="Actions Help">
+                  <div :id="actionsId + '-popup-body'">
+                    <p><strong>Defer</strong> - do nothing with the payment. It will remain in a deferred status until one of the other options is selected.</p>
+                    <p><strong>Approve</strong> - the certifying officer accepts the payment as displayed.</p>
+                    <p><strong>Reset Payment Processing</strong> - the certifying officer has determined an error in the payment transaction summary or wishes to apply offsets differently. All prompt payment processing, withholdings, and offsets will be removed from this payment. Special handling will have to be complete again for this payment before it can be certified.</p>
+                    <p><strong>Reset Address</strong> - to reset address from information provided by Financial Services if address displayed is incorrect. This will only reset address information for the customer, assignee, bankruptcy trustee and county office address without resetting all special handling steps processed for the payment. This will also reset address information for foreign address but will move the payment request back to Foreign Address Manual Handling step so user make changes.</p>
+                    <p><strong>Hold for Cancel by Program</strong> - the certifying officer has determine that this payment should not be made and the program application initiating the payment will be sending over a record to cancel this payment. This payment can no longer be certified unless the payment is reset. When payment is placed in this status, all associated special handling steps (i.e. prompt payment, withholdings, receivables) will be removed. This option is only available for individual payments and will be hidden for payments associated with a package.</p>
+                  </div>
+                </selection>
+              </span>
+              <span class="fsa-m-t--xs">
+                <button class="fsa-btn fsa-btn--primary">Submit</button>
+              </span>           
+            </div>
+          </div>
+
         </div>
       </div>
       
@@ -83,122 +144,49 @@
 import { ref, computed, watch, defineAsyncComponent, onMounted } from 'vue';
 import { useStore } from 'vuex';
 import { useNavigation } from '@/composables/useNavigation';
-import { useModalControls } from '@/composables/useModalControls';
 import { v4 as uuidv4 } from 'uuid';
 
 import baseHeader from '@/partials/BaseHeader.vue';
 import baseFooter from '@/partials/BaseFooter.vue';
 
-const field = defineAsyncComponent(() => import('@/components/field/field.vue'));
-const fieldGroup = defineAsyncComponent(() => import('@/components/field-group/field-group.vue'));
 const selection = defineAsyncComponent(() => import('@/components/selection/selection.vue'));
 const appData = defineAsyncComponent(() => import('@/views/demos/shared/App-Data.vue'));
-
-const steppedControl = defineAsyncComponent(() => import('@/components/stepped-control/stepped-control.vue'));
-
-const pageLevelHelpModal = defineAsyncComponent(() => import('@/views/demos/help/Page-Level-Help-Modal.vue'));
+const inlineHelp = defineAsyncComponent(() => import('@/components/inline-help/inline-help.vue'));
  
 export default {
   components: {
     baseHeader,
     baseFooter,
-    field,
-    fieldGroup,
     selection,
     appData,
-    steppedControl,
-    pageLevelHelpModal
+    inlineHelp
   },
 
   setup(props){
     const store = useStore();
     const { goto } = useNavigation();
-    const {
-      setModalId,
-      getModalId,
-      showModal,
-      hideModal
-    } = useModalControls();
 
-    const helpModalId = ref( uuidv4() );
-    setModalId(helpModalId.value);
-    
-    const nameField = ref(null);
-    
-    const vehicleField = ref(null);
-    const animalField = ref(null);
+    const summaryInlineHelpId = ref(uuidv4());
 
-    const stateField = ref(null);
-    const stateData = [
-      { id: "state1", label: "Alabama", name: "stateGroup" },
-      { id: "state2", label: "Alaska", name: "stateGroup" },
-      { id: "state3", label: "Arizona", name: "stateGroup" },
-      { id: "state4", label: "Arkansas", name: "stateGroup" },
+    const actionsId = ref(uuidv4());
+    const actionsData = [
+      { id: "a0", label: "Select an Action", name: "actionsGroup", val: 0, isDisabled: true, isSelected: true },
+      { id: "a1", label: "Defer", name: "actionsGroup" },
+      { id: "a2", label: "Approve", name: "actionsGroup" },
+      { id: "a3", label: "Reset Payment Processing", name: "actionsGroup" },
+      { id: "a4", label: "Reset Address", name: "actionsGroup" },
+      { id: "a5", label: "Hold for Cancel by Program", name: "actionsGroup" }
     ];
 
-    const countyData = [
-      { id: "county1", label: "Adair", name: "countyGroup" },
-      { id: "county2", label: "Abner", name: "countyGroup" },
-      { id: "county3", label: "Abner", name: "countyGroup" },
-      { id: "county4", label: "Abner", name: "countyGroup" },
-    ];
-
-    const addFiltersData = [
-      { id: "addFilter1", label: "Tax Id", name: "addFilterGroup" },
-      { id: "addFilter2", label: "Name", name: "addFilterGroup" },
-      { id: "addFilter3", label: "All", name: "addFilterGroup" },
-    ];
-
-
-    // Fake Data Code start
-    const usersData = computed( () => store.getters['users/getUsers'] );
-    let users = ref([]);
-    let isSortAsc = ref(true);
-    const getUsersData = () => {
-      store.dispatch('users/getUsersFromApi');
-    }
-
-    const toggleSort = (e) => {
-      let id = e.currentTarget.id;
-      isSortAsc.value = !isSortAsc.value;
-      if(isSortAsc.value){
-        users.value = usersData.value.sort( (a, b) => a.id - b.id );
-        document.getElementById(id).classList.remove('fsa-table__sort--descending')
-        document.getElementById(id).classList.add('fsa-table__sort--ascending')
-        document.getElementById(id).ariaSort = 'ascending'
-      } else {
-        users.value = usersData.value.sort( (a, b) => b.id - a.id );
-        document.getElementById(id).classList.remove('fsa-table__sort--ascending')
-        document.getElementById(id).classList.add('fsa-table__sort--descending')
-        document.getElementById(id).ariaSort = 'descending'
-      }
-    }
-    // Fake Data Code End
-
-    const searchPayments = () => {
-      console.log('searchPayments');
-      getUsersData();
-    }
-
-   
-
-    watch(usersData, (val) => {
-      users.value = val;
-    })
 
     onMounted(()=>{
       console.log('Payments onMounted');
     });
 
     return {
-      nameField,
-      users,
-      getUsersData,
-      toggleSort,
-      searchPayments,
-      showModal,
-      hideModal,
-      helpModalId
+      summaryInlineHelpId,
+      actionsId,
+      actionsData
     }
   }
 
