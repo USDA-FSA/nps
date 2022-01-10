@@ -23,6 +23,8 @@
               <h3>Original Payment Summary</h3>
             </span>
             <span class="fsa-m-r--s">
+
+
               <inline-help
                 POPOVER_TYPE="help"
                 POPOVER_CLASSES="fsa-popover--lt fsa-popover--size-large"
@@ -35,6 +37,9 @@
                   <p>The certifying officer will determine whether the payment can be certified. There are five options available to the certifying officer for individual payments and four options for payments associated with a package.</p>
                 </div>
               </inline-help>
+
+
+
             </span>
           </div>
           <div class="fsa-section">
@@ -99,6 +104,7 @@
             <div class="fsa-level">
               <span>Action: </span>
               <span>
+
                 <selection
                   :ID="actionsId"
                   LABEL=""
@@ -123,6 +129,9 @@
                     <p><strong>Hold for Cancel by Program</strong> - the certifying officer has determine that this payment should not be made and the program application initiating the payment will be sending over a record to cancel this payment. This payment can no longer be certified unless the payment is reset. When payment is placed in this status, all associated special handling steps (i.e. prompt payment, withholdings, receivables) will be removed. This option is only available for individual payments and will be hidden for payments associated with a package.</p>
                   </div>
                 </selection>
+
+
+                
               </span>
               <span class="fsa-m-t--xs">
                 <button class="fsa-btn fsa-btn--primary">Submit</button>

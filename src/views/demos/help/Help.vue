@@ -84,7 +84,7 @@ export default {
     const { goto } = useNavigation();
 
     onMounted(()=>{
-      console.log('Payments onMounted');
+      console.log('Help onMounted');
     });
 
     return {
