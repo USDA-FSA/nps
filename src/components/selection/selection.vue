@@ -18,9 +18,9 @@
             </svg>
           </button>
         </span>
-        <span v-if="REQUIRED=='true'" class="fsa-field__label-desc">Required</span>
+        
     </label>
-     <!-- Popover START -->
+    <!-- Popover START -->
     <div v-if="USE_POPOVER" :class="'fsa-popover '+ POPOVER_CLASSES" :id="POPOVER_ID" aria-hidden="true">
       
       <div class="fsa-popover__content">
