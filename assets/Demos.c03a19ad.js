@@ -1,0 +1,1 @@
+import{_ as s}from"./index.3da44a80.js";import{o as t,f as o,i as e}from"./vendor.d4f86f77.js";const n={},i=e("h1",null,"Demos",-1),l=e("ul",{class:"fsa-list--unstyled"},[e("li",null,"List item one"),e("li",null,"List item two"),e("li",null,"List item three")],-1),a=[i,l];function r(c,_,d,f,m,u){return t(),o("div",null,a)}var x=s(n,[["render",r]]);export{x as default};
