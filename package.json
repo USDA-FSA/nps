@@ -16,7 +16,7 @@
     "Casey Hill <bignamehere@gmail.com> (https://github.com/bignamehere)"
   ],
   "dependencies": {
-    "fsa-style": "^2.7.2",
+    "fsa-style": "^2.7.4",
     "uuid": "^8.3.2",
     "vue": "^3.0.5",
     "vue-router": "^4.0.11",

@@ -15,7 +15,8 @@ const config = {
     alias: {
       '@': path.resolve(__dirname, './src'),
     },
-  }
+  },
+  assetsInclude: ['**/*.svg']
   /*
   css: {
     preprocessorOptions: {

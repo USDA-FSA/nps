@@ -24,7 +24,6 @@
       </div>
       <div class="fsa-section">
         <div class="fsa-section__bd">
-
           <!-- Tabs START-->
           <div class="fsa-content-tabs fsa-content-tabs--justified-equal">
             <ul class="fsa-content-tabs__list">
